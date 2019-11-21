@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <link rel="stylesheet" href="styles/style.css">
+  <link rel="icon" type="ico" href="images/favicon.ico">
+  <title>Player Video</title>
+</head>
+<body>
+    <div class="player js-player">
+      <video class="video js-video" src="video/video.mp4" poster="images/poster.jpg"></video>
+
+
+      <div class="rewind-video js-rewind-video"></div>
+      <div class="forward-video js-forward-video"></div>
+      <div class="menu-video js-menu-video">
+        <div class="video-menu-video js-desc-video-menu-video video-current">
+          <h5 class="title-video-menu-video">BORA BORA ! PARADEX 1</h5>
+          <img class="image-menu-video js-image-menu-video" src="images/poster.jpg" alt="image of the video">
+        </div>
+        <div class="video-menu-video js-desc-video-menu-video">
+          <h5 class="title-video-menu-video">BEAUTIFUL CHINA - PARADEX 2</h5>
+          <img class="image-menu-video js-image-menu-video" src="images/poster2.jpg" alt="image of the video">
+        </div>
+      </div>
+      <div class="features-player">
+        <div class="title-current-video js-title-current-video">
+          <h3>BORA BORA ! PARADEX 1</h3>
+        </div>
+        <div class="title-current-video title-hide js-title-current-video">
+            <h3>BEAUTIFUL CHINA - PARADEX 2</h3>
+        </div>
+
+        <div class="share-button .js-share-button"></div>
+        <div class="loop-button js-loop-button"></div>
+        <div class="menu-video-button js-menu-video-button"></div>
+
+        <div class="play-button js-play-button"></div>
+
+        <div class="volume-button volume-full-button js-volume-button"></div>
+
+        <div class="seek-bar js-seek-bar">
+          <div class="fill js-seek-bar-fill"></div>
+        </div>
+
+        <div class="fullscreen js-fullscreen"></div>
+      </div>
+    </div>
+    <script src="scripts/script.js"></script>
+</body>
+</html>

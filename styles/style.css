@@ -1,0 +1,404 @@
+/* COLOR ICO : 0bb90b */
+
+body{
+    height: 100vh;
+    background: aquamarine ;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+}
+
+.hide{
+    display: none;
+}
+
+.player{
+    position: relative;
+    width: 50vw;
+    height: auto;
+}
+
+.video{
+    object-fit: cover;
+    width: 100%;
+    height: 100%;
+    box-shadow: 5px 5px 20px #000;
+    will-change: transform;
+}
+
+.features-player{
+    opacity: 0;
+}
+
+.player.is-active{
+    transition: transform 0.2s ease-in-out 0s;
+    will-change: transform;
+}
+
+.player:hover .features-player{
+    opacity: 1;
+}
+
+/* TITLE VIDEO */
+.title-current-video{
+    position: absolute;
+    top: 4%;
+    color: #FFF;
+    will-change: transform;
+}
+
+.title-current-video.title-hide{
+    opacity: 0;
+}
+
+.title-current-video h3{
+    margin: 0;
+}
+
+/* MENU VIDEO */
+
+.menu-video-button{
+    background: url('../images/menu-video.png');
+    background-size: cover;
+    width: 10px;
+    height: 10px;
+    position: absolute;
+    right: 3%;
+    top: 5%;
+    cursor: pointer;
+    will-change: transform;
+}
+
+.menu-video-button.is-active{
+    background: url('../images/menu-video-hover.png');
+    background-size: cover;
+    width: 10px;
+    height: 10px;
+    position: absolute;
+    right: 3%;
+    top: 5%;
+    cursor: pointer;
+    will-change: transform;
+    box-shadow: 5px 5px 20px #000;
+}
+
+.menu-video-button:hover{
+    background: url('../images/menu-video-hover.png');
+    background-size: cover;
+}
+
+.menu-video{
+    background: #000;
+    color: #FFF;
+    height: calc(100% - 4px);
+    position: absolute;
+    right: -30vw;
+    top: 0;
+    opacity: 0;
+    transform: scaleX(0);
+}
+
+.menu-video.is-active{
+    background: #000;
+    color: #FFF;
+    width: 30vw;
+    height: calc(100% - 4px);
+    opacity: 1;
+    transition: transform 0.3s ease-out 0s;
+    transform: scaleX(1);
+    transform-origin: left;
+    will-change: transform;
+}
+
+.video-menu-video{
+    height: 50%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    border-left: 5px solid #000;
+    border-right: 5px solid #000;
+    cursor: pointer;
+}
+
+.video-menu-video:hover{
+    border-left: 5px solid #0bb90b
+}
+
+.video-menu-video.video-current{
+    border-left: 5px solid #0bb90b
+}
+
+.title-video-menu-video{
+    margin: 0 auto;
+    margin-bottom: 5%;
+    margin-top: 5%;
+    opacity: 0;
+    will-change: transform, opacity;
+}
+
+.title-video-menu-video.is-active{
+    transition: opacity 0.1s linear 0.25s;
+    opacity: 1;
+}
+
+.menu-video .image-menu-video{
+    width: auto;
+    height: 70%;
+    opacity: 0;
+    will-change: transform, opacity;
+}
+
+.menu-video .image-menu-video.is-active{
+    transition: opacity 0.15s linear 0.20s;
+    opacity: 1;
+}
+
+/* SHARE BUTTON */
+
+.share-button{
+    background: url('../images/share-button.png');
+    background-size: cover;
+    width: 15px;
+    height: 15px;
+    position: absolute;
+    right: 11%;
+    top: 4.5%;
+    cursor: pointer;
+    will-change: transform;
+}
+
+.share-button.is-active{
+    background: url('../images/share-button.png');
+    background-size: cover;
+    width: 15px;
+    height: 15px;
+    position: absolute;
+    right: 9%;
+    top: 4.5%;
+    cursor: pointer;
+    will-change: transform;
+}
+
+.share-button:hover{
+    background: url('../images/share-button-hover.png');
+    background-size: cover;
+}
+
+/* LOOP VIDEO */
+
+.loop-button{
+    background: url('../images/loop.png');
+    background-size: cover;
+    width: 20px;
+    height: 10px;
+    position: absolute;
+    right: 6%;
+    top: 5%;
+    cursor: pointer;
+    will-change: transform;
+}
+
+.loop-button.is-active{
+    background: url('../images/loop-hover.png');
+    background-size: cover;
+    width: 20px;
+    height: 10px;
+    position: absolute;
+    right: 6%;
+    top: 5%;
+    cursor: pointer;
+    will-change: transform;
+}
+
+.loop-button:hover{
+    background: url('../images/loop-hover.png');
+    background-size: cover;
+}
+
+/* REWIND VIDEO */
+
+.rewind-video{
+    background: url('../images/rewind.png');
+    background-size: cover;
+    width: 50px;
+    height: 50px;
+    position: absolute;
+    top: calc(50% - 25px);
+    left: calc(50% - 25px);
+    opacity: 0;
+    transition: opacity 0.2s ease 0s;
+    will-change: opacity;
+}
+
+.rewind-video.is-active{
+    opacity: 0.7;
+}
+
+/* FORWARD VIDEO */
+
+.forward-video{
+    background: url('../images/forward.png');
+    background-size: cover;
+    width: 50px;
+    height: 50px;
+    position: absolute;
+    top: calc(50% - 25px);
+    left: calc(50% - 25px);
+    opacity: 0;
+    transition: opacity 0.2s ease 0s;
+    will-change: opacity;
+}
+
+.forward-video.is-active{
+    opacity: 0.7;
+}
+
+/* SEEK BAR */
+
+.player .seek-bar{
+    position: absolute;
+    bottom: 9%;
+    left: 15%;
+    width: 70%;
+    height: 7.5px;
+    background: #CCCCCC;
+    opacity: 0.4;
+    border-radius: 10px;
+    cursor: pointer;
+    will-change: transform;
+}
+  
+.player .seek-bar .fill{
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgb(11, 185, 11);
+    transform: scaleX(0);
+    transform-origin: 0 0;
+    cursor: pointer;
+    border-radius: 10px;
+    will-change: transform;
+}
+
+/* PLAY BUTTON */
+
+.play-button{
+    background: url('../images/play-button.png');
+    background-size: cover;
+    width: 17px;
+    height: 17px;
+    position: absolute;
+    bottom: 8%;
+    left: 4%;
+    cursor: pointer;
+    will-change: transform;
+}
+
+.play-button:hover{
+    background: url('../images/play-button-hover.png');
+    background-size: cover;
+    width: 20px;
+    height: 20px;
+}
+
+.pause-button{
+    background: url('../images/pause-button.png');
+    background-size: cover;
+    width: 15px;
+    height: 15px;
+    position: absolute;
+    bottom: 8%;
+    left: 5%;
+    cursor: pointer;
+    will-change: transform;
+}
+
+.pause-button:hover{
+    background: url('../images/pause-button-hover.png');
+    background-size: cover;
+    width: 17px;
+    height: 17px;
+}
+
+/* VOLUME BUTTON */
+
+.volume-button.volume-full-button{
+    background: url('../images/volume-full-button.png');
+    background-size: cover;
+    width: 18px;
+    height: 18px;
+    position: absolute;
+    bottom: 7.7%;
+    left: 9%;
+    cursor: pointer;
+    will-change: transform;
+}
+
+.volume-button.volume-full-button:hover{
+    background: url('../images/volume-full-button-hover.png');
+    background-size: cover;
+    width: 20px;
+    height: 20px;
+}
+
+.volume-button.volume-medium-button{
+    background: url('../images/volume-medium-button.png');
+    background-size: cover;
+    width: 18px;
+    height: 18px;
+    position: absolute;
+    bottom: 7.7%;
+    left: 9%;
+    cursor: pointer;
+    will-change: transform;
+}
+
+.volume-button.volume-medium-button:hover{
+    background: url('../images/volume-medium-button-hover.png');
+    background-size: cover;
+    width: 20px;
+    height: 20px;
+}
+
+.volume-button.volume-muted-button{
+    background: url('../images/volume-muted-button.png');
+    background-size: cover;
+    width: 18px;
+    height: 18px;
+    position: absolute;
+    bottom: 7.7%;
+    left: 9%;
+    cursor: pointer;
+    will-change: transform;
+}
+
+.volume-button.volume-muted-button:hover{
+    background: url('../images/volume-muted-button-hover.png');
+    background-size: cover;
+    width: 20px;
+    height: 20px;
+}
+
+/* FULLSCREEN */
+
+.fullscreen{
+    background: url('../images/open-fullscreen.png');
+    background-size: cover;
+    width: 15px;
+    height: 15px;
+    position: absolute;
+    bottom: 8%;
+    right: 5%;
+    cursor: pointer;
+    will-change: transform;
+}
+
+.fullscreen:hover{
+    background: url('../images/open-fullscreen-hover.png');
+    background-size: cover;
+    width: 17px;
+    height: 17px;
+}
