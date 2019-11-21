@@ -3,6 +3,12 @@ class Player{
         this.element = _element
         this.videoElement = this.element.querySelector('.js-video')
 
+        // setTimer Selector
+        this.videoCurrentTimeDisplay = this.element.querySelector('.js-video-current-time')
+        this.videoCurrentTimeDisplay2 = this.element.querySelector('.js-video-current-time-2')
+        this.videoDurationTimeDisplay = this.element.querySelector('.js-video-duration')
+        this.videoDurationTimeDisplay2 = this.element.querySelector('.js-video-duration-2')
+
         // setVideo Selector
         this.descVideoMenu = this.element.querySelectorAll('.js-desc-video-menu-video')
         this.titleCurrentVideo = this.element.querySelectorAll('.js-title-current-video')
@@ -26,6 +32,7 @@ class Player{
         // setPlay Selector
         this.playElement = this.element.querySelector('.js-play-button')
 
+        this.setTimer()
         this.setVideo()
         this.setMenuVideo()
         this.setLoop()
@@ -34,6 +41,13 @@ class Player{
         this.setPlayPause()
         this.setVolume()
         this.setSeekBar()
+    }
+    setTimer(){
+        this.videoElement.addEventListener('timeupdate', () =>{
+            this.videoCurrentTimeDisplay.innerHTML = `${Math.floor(this.videoElement.currentTime)}  / `
+
+            this.videoDurationTimeDisplay.innerHTML = `-${Math.floor(this.videoElement.duration - this.videoElement.currentTime)} : `
+        })
     }
     setVideo(){
         this.descVideoMenu.forEach((_element, _key) =>{
@@ -372,65 +386,3 @@ class Player{
 }
 
 const player = new Player(document.querySelector('.js-player'))
-
-let dragItem = document.querySelector(".js-seek-bar-fill");
-let container = document.querySelector(".js-seek-bar");
-
-let active = false;
-let currentX;
-let currentY;
-let initialX;
-let initialY;
-let xOffset = 0;
-let yOffset = 0;
-
-container.addEventListener("touchstart", dragStart, false);
-container.addEventListener("touchend", dragEnd, false);
-container.addEventListener("touchmove", drag, false);
-
-container.addEventListener("mousedown", dragStart, false);
-container.addEventListener("mouseup", dragEnd, false);
-container.addEventListener("mousemove", drag, false);
-
-function dragStart(e) {
-    if(e.type === "touchstart"){
-        initialX = e.touches[0].clientX - xOffset;
-        initialY = e.touches[0].clientY - yOffset;
-    } 
-    else{
-        initialX = e.clientX - xOffset;
-        initialY = e.clientY - yOffset;
-    }
-
-    if(e.target === dragItem){
-        active = true;
-    }
-}
-
-function dragEnd(e){
-    initialX = currentX;
-    initialY = currentY;
-
-    active = false;
-}
-
-function drag(e){
-    if(active){
-        e.preventDefault();
-        if(e.type === "touchmove"){
-            currentX = e.touches[0].clientX - initialX;
-            currentY = e.touches[0].clientY - initialY;
-        } 
-        else{
-            currentX = e.clientX - initialX;
-            currentY = e.clientY - initialY;
-        }
-        xOffset = currentX;
-        yOffset = currentY;
-        setTranslate(currentX, currentY, dragItem);
-    }
-}
-
-function setTranslate(xPos, yPos, el){
-    el.style.transform = `scaleX( ${xPos}px, 0px, 0)`;
-}

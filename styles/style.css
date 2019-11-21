@@ -260,7 +260,7 @@ body{
     position: absolute;
     bottom: 9%;
     left: 15%;
-    width: 70%;
+    width: 65%;
     height: 7.5px;
     background: #CCCCCC;
     opacity: 0.4;
@@ -380,6 +380,26 @@ body{
     background-size: cover;
     width: 20px;
     height: 20px;
+}
+
+/* TIMER VIDEO */
+
+.video-current-time{
+    margin: 0;
+    position: absolute;
+    right: 13%;
+    bottom: 8%;
+    color: #FFF;
+    font-size : 12px;
+}
+
+.video-duration{
+    margin: 0;
+    position: absolute;
+    right: 8%;
+    bottom: 8%;
+    color: #FFF;
+    font-size: 12px;
 }
 
 /* FULLSCREEN */
