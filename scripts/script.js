@@ -17,6 +17,15 @@ class Player{
         // setVolume Selector
         this.volumeElement = this.element.querySelector('.js-volume-button')
 
+        // setLoop Selector
+        this.loopElement = this.element.querySelector('.js-loop-button')
+
+        // setFullscreen Selector
+        this.fullscreenElement = this.element.querySelector('.js-fullscreen')
+
+        // setPlay Selector
+        this.playElement = this.element.querySelector('.js-play-button')
+
         this.setVideo()
         this.setMenuVideo()
         this.setLoop()
@@ -118,17 +127,16 @@ class Player{
     }
     setLoop(){
         // Video is on loop when click on the button loop
-        const loopElement = document.querySelector('.js-loop-button')
         let loopStatus = false
-        loopElement.addEventListener('click', () =>{
+        this.loopElement.addEventListener('click', () =>{
             if(loopStatus === false){
                 this.videoElement.setAttribute('loop','')
-                loopElement.classList.add('is-active')
+                this.loopElement.classList.add('is-active')
                 loopStatus = true
             }
             else if(loopStatus === true){
                 this.videoElement.removeAttribute('loop','')
-                loopElement.classList.remove('is-active')
+                this.loopElement.classList.remove('is-active')
                 loopStatus = false
             }
         })
@@ -142,9 +150,8 @@ class Player{
         })
     }
     setFullScreen(){
-        const fullscreenElement = this.element.querySelector('.js-fullscreen')
         // Fullscreen on the fullscreen button
-        fullscreenElement.addEventListener('click', () =>{
+        this.fullscreenElement.addEventListener('click', () =>{
             this.videoElement.requestFullscreen()
         })
         // Fullscreen when F is press
@@ -160,20 +167,19 @@ class Player{
             })
     }
     setPlayPause(){
-        const playElement = this.element.querySelector('.js-play-button')
         let playStatus = false
         // Play or pause when click on the button play/pause
-        playElement.addEventListener('click', (event) =>{
+        this.playElement.addEventListener('click', (event) =>{
             if(playStatus === false){
                 this.videoElement.play()
-                playElement.classList.remove('play-button')
-                playElement.classList.add('pause-button')
+                this.playElement.classList.remove('play-button')
+                this.playElement.classList.add('pause-button')
                 playStatus = true
             }
             else{
                 this.videoElement.pause()
-                playElement.classList.add('play-button')
-                playElement.classList.remove('pause-button')
+                this.playElement.classList.add('play-button')
+                this.playElement.classList.remove('pause-button')
                 playStatus = false
             }
         })
@@ -181,14 +187,14 @@ class Player{
         this.videoElement.addEventListener('click', () =>{
                 if(playStatus === false){
                     this.videoElement.play()
-                    playElement.classList.remove('play-button')
-                    playElement.classList.add('pause-button')
+                    this.playElement.classList.remove('play-button')
+                    this.playElement.classList.add('pause-button')
                     playStatus = true
                 }
                 else{
                     this.videoElement.pause()
-                    playElement.classList.add('play-button')
-                    playElement.classList.remove('pause-button')
+                    this.playElement.classList.add('play-button')
+                    this.playElement.classList.remove('pause-button')
                     playStatus = false
                 }
             })
@@ -196,14 +202,14 @@ class Player{
         window.addEventListener('keydown', (event) =>{
             if(event.key === ' ' && playStatus === false){
                 this.videoElement.play()
-                playElement.classList.remove('play-button')
-                playElement.classList.add('pause-button')
+                this.playElement.classList.remove('play-button')
+                this.playElement.classList.add('pause-button')
                 playStatus = true
             }
             else if(event.key === ' ' && playStatus === true){
                 this.videoElement.pause()
-                playElement.classList.add('play-button')
-                playElement.classList.remove('pause-button')
+                this.playElement.classList.add('play-button')
+                this.playElement.classList.remove('pause-button')
                 playStatus = false
             }
         })

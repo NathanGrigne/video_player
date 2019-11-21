@@ -130,11 +130,11 @@ body{
 }
 
 .title-video-menu-video{
-    margin: 0 auto;
-    margin-bottom: 5%;
-    margin-top: 5%;
+    margin: 0 0 9% 0;
     opacity: 0;
     will-change: transform, opacity;
+    text-align: center;
+    font-size: 12px;
 }
 
 .title-video-menu-video.is-active{
@@ -143,8 +143,8 @@ body{
 }
 
 .menu-video .image-menu-video{
-    width: auto;
-    height: 70%;
+    width: 15vw;
+    height: auto;
     opacity: 0;
     will-change: transform, opacity;
 }
@@ -311,7 +311,7 @@ body{
     height: 15px;
     position: absolute;
     bottom: 8%;
-    left: 5%;
+    left: 4%;
     cursor: pointer;
     will-change: transform;
 }
