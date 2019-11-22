@@ -169,20 +169,28 @@ body{
 }
 
 .share-button.is-active{
-    background: url('../images/share-button.png');
+    background: url('../images/share-button-hover.png');
     background-size: cover;
-    width: 15px;
-    height: 15px;
-    position: absolute;
-    right: 9%;
-    top: 4.5%;
-    cursor: pointer;
-    will-change: transform;
 }
 
 .share-button:hover{
     background: url('../images/share-button-hover.png');
     background-size: cover;
+}
+
+.share-text{
+    position: absolute;
+    top: 10%;
+    right: 4%;
+    width: 50px;
+    height: 12px;
+    border: none;
+    opacity: 0;
+    color: #000;
+}
+
+.share-text.is-active{
+    opacity: 1;
 }
 
 /* LOOP VIDEO */
@@ -260,7 +268,7 @@ body{
     position: absolute;
     bottom: 9%;
     left: 15%;
-    width: 65%;
+    width: 60%;
     height: 7.5px;
     background: #CCCCCC;
     opacity: 0.4;
@@ -387,7 +395,7 @@ body{
 .video-current-time{
     margin: 0;
     position: absolute;
-    right: 13%;
+    right: 18%;
     bottom: 8%;
     color: #FFF;
     font-size : 12px;
@@ -396,10 +404,30 @@ body{
 .video-duration{
     margin: 0;
     position: absolute;
-    right: 8%;
+    right: 13%;
     bottom: 8%;
     color: #FFF;
     font-size: 12px;
+}
+
+/* PICTURE IN PICTURE */
+
+.picture-in-picture{
+    background: url('../images/picture-in-picture.png');
+    background-size: cover;
+    width: 20px;
+    height: 20px;
+    position: absolute;
+    right: 9%;
+    bottom: 7.5%;
+    cursor: pointer;
+}
+
+.picture-in-picture:hover{
+    background: url('../images/picture-in-picture-hover.png');
+    background-size: cover;
+    width: 22px;
+    height: 22px;
 }
 
 /* FULLSCREEN */

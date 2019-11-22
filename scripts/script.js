@@ -3,6 +3,13 @@ class Player{
         this.element = _element
         this.videoElement = this.element.querySelector('.js-video')
 
+        // setShare Selector
+        this.buttonShare = this.element.querySelector('.js-share-button')
+        this.textShare = this.element.querySelector('.js-share-text')
+
+        // setPictureInPicture Selector
+        this.buttonPictureInPicture = this.element.querySelector('.js-picture-in-picture')
+
         // setTimer Selector
         this.videoCurrentTimeDisplay = this.element.querySelector('.js-video-current-time')
         this.videoCurrentTimeDisplay2 = this.element.querySelector('.js-video-current-time-2')
@@ -32,6 +39,14 @@ class Player{
         // setPlay Selector
         this.playElement = this.element.querySelector('.js-play-button')
 
+        // setSeekBar Selector
+        this.seekBarElement = this.element.querySelector('.js-seek-bar')
+        this.fillElement = this.element.querySelector('.js-seek-bar-fill')
+        this.rewindElement = this.element.querySelector('.js-rewind-video')
+        this.forwardElement = this.element.querySelector('.js-forward-video')
+
+        this.setShare()
+        this.setPictureInPicture()
         this.setTimer()
         this.setVideo()
         this.setMenuVideo()
@@ -41,6 +56,26 @@ class Player{
         this.setPlayPause()
         this.setVolume()
         this.setSeekBar()
+    }
+    setShare(){
+        this.buttonShare.addEventListener('click', () =>{
+            this.textShare.value = window.location.href
+            this.textShare.classList.toggle('is-active')
+            this.buttonShare.classList.toggle('is-active')
+        })
+    }
+    setPictureInPicture(){
+        this.buttonPictureInPicture.addEventListener('click', () =>{
+            this.videoElement.requestPictureInPicture()
+        })
+        document.addEventListener('keydown', (event) =>{
+            if(event.key === 'Escape'){
+                document.exitPictureInPicture()
+            }
+            else if(event.key === 'p' || event.key === 'P'){
+                this.videoElement.requestPictureInPicture()
+            }
+        })
     }
     setTimer(){
         this.videoElement.addEventListener('timeupdate', () =>{
@@ -97,7 +132,7 @@ class Player{
             this.buttonMenuElement.classList.toggle('is-active')
             jsPlayerElement.classList.toggle('is-active')
             this.imageMenuVideoElement.forEach((_element) =>{
-                _element.classList.toggle('is-active') 
+                _element.classList.toggle ('is-active') 
             })
             this.titleMenuVideoElement.forEach((_element) =>{
                 _element.classList.toggle('is-active')
@@ -114,6 +149,12 @@ class Player{
         // Leave menu when Escape is press
         document.addEventListener('keydown', (event) =>{
             if(event.key === 'Escape' && this.menuElement.classList.contains('is-active')){
+                this.imageMenuVideoElement.forEach((_element) =>{
+                    _element.classList.remove('is-active') 
+                })
+                this.titleMenuVideoElement.forEach((_element) =>{
+                    _element.classList.remove('is-active')
+                })
                 this.menuElement.classList.remove('is-active')
                 this.buttonMenuElement.classList.remove('is-active')
                 jsPlayerElement.classList.remove('is-active')
@@ -160,7 +201,6 @@ class Player{
         this.titleCurrentVideo.forEach((_element) =>{
             let titleVideoWidth = _element.offsetWidth
             _element.style.left = `calc(50% - ${titleVideoWidth/2}px)`
-            console.log(titleVideoWidth)
         })
     }
     setFullScreen(){
@@ -299,17 +339,14 @@ class Player{
         
     }
     setSeekBar(){
-        const seekBarElement = this.element.querySelector('.js-seek-bar')
-        const fillElement = this.element.querySelector('.js-seek-bar-fill')
-
         this.videoElement.addEventListener('timeupdate', () =>{
                 const ratio = this.videoElement.currentTime / this.videoElement.duration
 
-                fillElement.style.transform = `scaleX(${ratio})`
+                this.fillElement.style.transform = `scaleX(${ratio})`
             })
 
-            seekBarElement.addEventListener('click', (_event) =>{
-                const bounding = seekBarElement.getBoundingClientRect()
+            this.seekBarElement.addEventListener('click', (_event) =>{
+                const bounding = this.seekBarElement.getBoundingClientRect()
                 const ratio = (_event.clientX - bounding.left) / bounding.width
                 const time = ratio * this.videoElement.duration
 
@@ -317,8 +354,6 @@ class Player{
             })
         // Press a number between 0 and 9 and go to the percentage of the video
         // Time is forward or rewind by 10s when arrowLeft or arrowRight is press
-        const rewindElement = document.querySelector('.js-rewind-video')
-        const forwardElement = document.querySelector('.js-forward-video')
             document.addEventListener('keydown', (event) =>{
                 // Time to 0% video
                 if(event.key === 'à' || event.key === '0'){
@@ -363,23 +398,21 @@ class Player{
                 // Rewind video by 10 sec
                 else if(event.key === 'ArrowLeft'){
                     this.videoElement.currentTime = this.videoElement.currentTime - 10
-                    rewindElement.classList.add('is-active')
-                    console.log(this.videoElement.currentTime)
+                    this.rewindElement.classList.add('is-active')
                 }
                 // Forward video by 10 sec
                 else if(event.key === 'ArrowRight'){
                     this.videoElement.currentTime = this.videoElement.currentTime + 10
-                    forwardElement.classList.add('is-active')
-                    console.log(this.videoElement.currentTime)
+                    this.forwardElement.classList.add('is-active')
                 }
             })
         // Remove mark rewind / forward
         document.addEventListener('keyup', (event) =>{
             if(event.key === 'ArrowLeft'){
-                rewindElement.classList.remove('is-active')
+                this.rewindElement.classList.remove('is-active')
             }
             else if(event.key === 'ArrowRight'){
-                forwardElement.classList.remove('is-active')
+                this.forwardElement.classList.remove('is-active')
             }
         })
     }
