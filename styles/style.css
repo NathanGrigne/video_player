@@ -187,6 +187,7 @@ body{
     border: none;
     opacity: 0;
     color: #000;
+    font-size: 10px;
 }
 
 .share-text.is-active{
