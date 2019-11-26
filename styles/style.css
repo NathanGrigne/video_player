@@ -394,7 +394,7 @@ body{
     height: 20px;
     width: 20px;
     position: absolute;
-    bottom: 7.5%;
+    bottom: 6.5%;
     left: 9%;
 }
 
@@ -444,7 +444,7 @@ body{
 .video-current-time{
     margin: 0;
     position: absolute;
-    right: 20%;
+    right: 21%;
     bottom: 8%;
     color: #FFF;
     font-size : 12px;
