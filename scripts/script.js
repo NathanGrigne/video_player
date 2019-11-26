@@ -121,7 +121,7 @@ class Player{
             let currentTimeSeconds = Math.floor(this.videoElement.currentTime % 60)
             let currentTimeMinutes = Math.floor((this.videoElement.currentTime) / 60)
 
-            this.videoCurrentTimeDisplay.innerHTML = `${currentTimeMinutes} : ${currentTimeSeconds} /`
+            this.videoCurrentTimeDisplay.innerHTML = `${currentTimeMinutes} : ${currentTimeSeconds}`
 
             if(currentTimeSeconds < 60){
                 currentTimeSeconds = 0
@@ -166,7 +166,7 @@ class Player{
                     this.videoElement.removeAttribute('poster','images/poster.jpg')
                     this.videoElement.setAttribute('poster','images/poster2.jpg')
 
-                    _element.classList.toggle('video-current')
+                    _element.classList.add('video-current')
 
                     this.titleCurrentVideo.forEach((_element, _key) =>{
                         if(_key === 0){
