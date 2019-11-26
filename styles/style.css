@@ -269,10 +269,9 @@ body{
     position: absolute;
     bottom: 9%;
     left: 15%;
-    width: 60%;
+    width: 55%;
     height: 7.5px;
-    background: #CCCCCC;
-    opacity: 0.4;
+    background: #FFFFFF80;
     border-radius: 10px;
     cursor: pointer;
     will-change: transform;
@@ -284,7 +283,7 @@ body{
     left: 0;
     width: 100%;
     height: 100%;
-    background: rgb(11, 185, 11);
+    background: #0bb90b;
     transform: scaleX(0);
     transform-origin: 0 0;
     cursor: pointer;
@@ -445,7 +444,7 @@ body{
 .video-current-time{
     margin: 0;
     position: absolute;
-    right: 18%;
+    right: 20%;
     bottom: 8%;
     color: #FFF;
     font-size : 12px;
@@ -454,7 +453,7 @@ body{
 .video-duration{
     margin: 0;
     position: absolute;
-    right: 13%;
+    right: 14.5%;
     bottom: 8%;
     color: #FFF;
     font-size: 12px;

@@ -16,9 +16,7 @@ class Player{
 
         // setTimer Selector
         this.videoCurrentTimeDisplay = this.element.querySelector('.js-video-current-time')
-        this.videoCurrentTimeDisplay2 = this.element.querySelector('.js-video-current-time-2')
         this.videoDurationTimeDisplay = this.element.querySelector('.js-video-duration')
-        this.videoDurationTimeDisplay2 = this.element.querySelector('.js-video-duration-2')
 
         // setVideo Selector
         this.descVideoMenu = this.element.querySelectorAll('.js-desc-video-menu-video')
@@ -72,8 +70,6 @@ class Player{
 
             this.videoElement.volume = volume
 
-            console.log(volume)
-
             if(this.videoElement.volume > 0.5){
                 this.volumeElement.classList.add('volume-full-button')
                 this.volumeElement.classList.remove('volume-medium-button')
@@ -100,27 +96,47 @@ class Player{
         })
     }
     setPictureInPicture(){
+        let pictureInPictureStatus = false
         // On click on Button Picture in Picture launch Picture in picture mode
         this.buttonPictureInPicture.addEventListener('click', () =>{
             this.videoElement.requestPictureInPicture()
+            pictureInPictureStatus = true
         })
         // Exit Picture in Picture mode when 'Escape' is press
         document.addEventListener('keydown', (event) =>{
-            if(event.key === 'Escape'){
+            if(event.key === 'Escape' && pictureInPictureStatus === true){
                 document.exitPictureInPicture()
+                pictureInPictureStatus = false
             }
             // Open Picture in Pïcture mode when 'P' is press
             else if(event.key === 'p' || event.key === 'P'){
                 this.videoElement.requestPictureInPicture()
+                pictureInPictureStatus = true
             }
         })
     }
     setTimer(){
         // Display current time and time remaining of the video
         this.videoElement.addEventListener('timeupdate', () =>{
-            this.videoCurrentTimeDisplay.innerHTML = `${Math.floor(this.videoElement.currentTime)}  / `
+            let currentTimeSeconds = Math.floor(this.videoElement.currentTime % 60)
+            let currentTimeMinutes = Math.floor((this.videoElement.currentTime) / 60)
 
-            this.videoDurationTimeDisplay.innerHTML = `-${Math.floor(this.videoElement.duration - this.videoElement.currentTime)} : `
+            this.videoCurrentTimeDisplay.innerHTML = `${currentTimeMinutes} : ${currentTimeSeconds} /`
+
+            if(currentTimeSeconds < 60){
+                currentTimeSeconds = 0
+                currentTimeMinutes++
+            }
+
+            let durationTimeSeconds = Math.floor((this.videoElement.duration - this.videoElement.currentTime) % 60)
+            let durationTimeMinutes = Math.floor((this.videoElement.duration - this.videoElement.currentTime) / 60)
+
+            this.videoDurationTimeDisplay.innerHTML = `${durationTimeMinutes} : ${durationTimeSeconds}`
+
+            if(durationTimeSeconds < 60){
+                durationTimeSeconds = 0
+                durationTimeMinutes++
+            }
         })
     }
     setVideo(){
@@ -330,11 +346,13 @@ class Player{
         window.addEventListener('keydown', (event) =>{
             // Volume down
             if(event.key === 'ArrowDown'){
+                this.seekBarVolumeFill.style.transform = `scaleY(${this.videoElement.volume})`
                 this.videoElement.volume = Math.max(this.videoElement.volume - 0.1, 0)
                 if(this.videoElement.volume > 0.5){
                     this.volumeElement.classList.add('volume-full-button')
                     this.volumeElement.classList.remove('volume-medium-button')
                     this.volumeElement.classList.remove('volume-muted-button')
+
                 }
                 else if(this.videoElement.volume > 0 && this.videoElement.volume <= 0.5){
                     this.volumeElement.classList.add('volume-medium-button')
@@ -349,6 +367,7 @@ class Player{
             }
             // Volume Up
             else if(event.key === 'ArrowUp'){
+                this.seekBarVolumeFill.style.transform = `scaleY(${this.videoElement.volume})`
                 this.videoElement.volume = Math.min(this.videoElement.volume + 0.1, 1)
                     if(this.videoElement.volume > 0.5){
                         this.volumeElement.classList.add('volume-full-button')
