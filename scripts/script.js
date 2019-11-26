@@ -3,6 +3,10 @@ class Player{
         this.element = _element
         this.videoElement = this.element.querySelector('.js-video')
 
+        // setSeekBarVolume Selector
+        this.seekBarVolume = this.element.querySelector('.js-volume-seek-bar')
+        this.seekBarVolumeFill = this.element.querySelector('.js-volume-seek-bar-fill')
+
         // setShare Selector
         this.buttonShare = this.element.querySelector('.js-share-button')
         this.textShare = this.element.querySelector('.js-share-text')
@@ -45,6 +49,7 @@ class Player{
         this.rewindElement = this.element.querySelector('.js-rewind-video')
         this.forwardElement = this.element.querySelector('.js-forward-video')
 
+        this.setSeekBarVolume()
         this.setShare()
         this.setPictureInPicture()
         this.setTimer()
@@ -57,7 +62,37 @@ class Player{
         this.setVolume()
         this.setSeekBar()
     }
+    setSeekBarVolume(){
+        this.seekBarVolume.addEventListener('click', (_event) =>{
+            const bounding = this.seekBarVolume.getBoundingClientRect()
+            const ratio = (_event.clientY - bounding.top) / bounding.height
+            const volume = ratio
+
+            this.seekBarVolumeFill.style.transform = `scaleY(${ratio})`
+
+            this.videoElement.volume = volume
+
+            console.log(volume)
+
+            if(this.videoElement.volume > 0.5){
+                this.volumeElement.classList.add('volume-full-button')
+                this.volumeElement.classList.remove('volume-medium-button')
+                this.volumeElement.classList.remove('volume-muted-button')
+            }
+            else if(this.videoElement.volume > 0 && this.videoElement.volume <= 0.5){
+                this.volumeElement.classList.add('volume-medium-button')
+                this.volumeElement.classList.remove('volume-muted-button')
+                this.volumeElement.classList.remove('volume-full-button')
+            }
+            else if(this.videoElement.volume === 0){
+                this.volumeElement.classList.remove('volume-medium-button')
+                this.volumeElement.classList.add('volume-muted-button')
+                this.volumeElement.classList.remove('volume-full-button')
+            }
+        })
+    }
     setShare(){
+        // Display url of the current page 
         this.buttonShare.addEventListener('click', () =>{
             this.textShare.value = window.location.href
             this.textShare.classList.toggle('is-active')
@@ -65,19 +100,23 @@ class Player{
         })
     }
     setPictureInPicture(){
+        // On click on Button Picture in Picture launch Picture in picture mode
         this.buttonPictureInPicture.addEventListener('click', () =>{
             this.videoElement.requestPictureInPicture()
         })
+        // Exit Picture in Picture mode when 'Escape' is press
         document.addEventListener('keydown', (event) =>{
             if(event.key === 'Escape'){
                 document.exitPictureInPicture()
             }
+            // Open Picture in Pïcture mode when 'P' is press
             else if(event.key === 'p' || event.key === 'P'){
                 this.videoElement.requestPictureInPicture()
             }
         })
     }
     setTimer(){
+        // Display current time and time remaining of the video
         this.videoElement.addEventListener('timeupdate', () =>{
             this.videoCurrentTimeDisplay.innerHTML = `${Math.floor(this.videoElement.currentTime)}  / `
 
@@ -85,6 +124,7 @@ class Player{
         })
     }
     setVideo(){
+        // Set video in the menu video
         this.descVideoMenu.forEach((_element, _key) =>{
             _element.addEventListener('click', () =>{
                 if(_key === 0){
@@ -132,7 +172,7 @@ class Player{
             this.buttonMenuElement.classList.toggle('is-active')
             jsPlayerElement.classList.toggle('is-active')
             this.imageMenuVideoElement.forEach((_element) =>{
-                _element.classList.toggle ('is-active') 
+                _element.classList.toggle('is-active') 
             })
             this.titleMenuVideoElement.forEach((_element) =>{
                 _element.classList.toggle('is-active')
@@ -285,27 +325,28 @@ class Player{
                 this.volumeElement.classList.add('volume-full-button')
             }
         })
+        
         // Volume up or down when the arrow top or bottom is press
         window.addEventListener('keydown', (event) =>{
             // Volume down
             if(event.key === 'ArrowDown'){
                 this.videoElement.volume = Math.max(this.videoElement.volume - 0.1, 0)
-                    if(this.videoElement.volume > 0.5){
-                        this.volumeElement.classList.add('volume-full-button')
-                        this.volumeElement.classList.remove('volume-medium-button')
-                        this.volumeElement.classList.remove('volume-muted-button')
-                    }
-                    else if(this.videoElement.volume > 0 && this.videoElement.volume <= 0.5){
-                        this.volumeElement.classList.add('volume-medium-button')
-                        this.volumeElement.classList.remove('volume-muted-button')
-                        this.volumeElement.classList.remove('volume-full-button')
-                    }
-                    else if(this.videoElement.volume === 0){
-                        this.volumeElement.classList.remove('volume-medium-button')
-                        this.volumeElement.classList.add('volume-muted-button')
-                        this.volumeElement.classList.remove('volume-full-button')
-                    }
+                if(this.videoElement.volume > 0.5){
+                    this.volumeElement.classList.add('volume-full-button')
+                    this.volumeElement.classList.remove('volume-medium-button')
+                    this.volumeElement.classList.remove('volume-muted-button')
                 }
+                else if(this.videoElement.volume > 0 && this.videoElement.volume <= 0.5){
+                    this.volumeElement.classList.add('volume-medium-button')
+                    this.volumeElement.classList.remove('volume-muted-button')
+                    this.volumeElement.classList.remove('volume-full-button')
+                }
+                else if(this.videoElement.volume === 0){
+                    this.volumeElement.classList.remove('volume-medium-button')
+                    this.volumeElement.classList.add('volume-muted-button')
+                    this.volumeElement.classList.remove('volume-full-button')
+                }
+            }
             // Volume Up
             else if(event.key === 'ArrowUp'){
                 this.videoElement.volume = Math.min(this.videoElement.volume + 0.1, 1)
@@ -340,72 +381,72 @@ class Player{
     }
     setSeekBar(){
         this.videoElement.addEventListener('timeupdate', () =>{
-                const ratio = this.videoElement.currentTime / this.videoElement.duration
+            const ratio = this.videoElement.currentTime / this.videoElement.duration
 
-                this.fillElement.style.transform = `scaleX(${ratio})`
-            })
+            this.fillElement.style.transform = `scaleX(${ratio})`
+        })
 
-            this.seekBarElement.addEventListener('click', (_event) =>{
-                const bounding = this.seekBarElement.getBoundingClientRect()
-                const ratio = (_event.clientX - bounding.left) / bounding.width
-                const time = ratio * this.videoElement.duration
+        this.seekBarElement.addEventListener('click', (_event) =>{
+            const bounding = this.seekBarElement.getBoundingClientRect()
+            const ratio = (_event.clientX - bounding.left) / bounding.width
+            const time = ratio * this.videoElement.duration
 
-                this.videoElement.currentTime = time
-            })
+            this.videoElement.currentTime = time
+        })
         // Press a number between 0 and 9 and go to the percentage of the video
         // Time is forward or rewind by 10s when arrowLeft or arrowRight is press
-            document.addEventListener('keydown', (event) =>{
-                // Time to 0% video
-                if(event.key === 'à' || event.key === '0'){
-                    this.videoElement.currentTime = (this.videoElement.duration / this.videoElement.currentTime) * 0
-                }
-                // Time to 10% video
-                else if(event.key === '&' || event.key === '1'){
-                    this.videoElement.currentTime = (this.videoElement.duration * (10 / 100))
-                }
-                // Time to 20% video
-                else if(event.key === 'é' || event.key === '2'){
-                    this.videoElement.currentTime = (this.videoElement.duration * (20 / 100))
-                }
-                // Time to 30% video
-                else if(event.key === '"' || event.key === '3'){
-                    this.videoElement.currentTime = (this.videoElement.duration * (30 / 100))
-                }
-                // Time to 40% video
-                else if(event.key === `'` || event.key === '4'){
-                    this.videoElement.currentTime = (this.videoElement.duration * (40 / 100))
-                }
-                // Time to 50% video
-                else if(event.key === '(' || event.key === '5'){
-                    this.videoElement.currentTime = (this.videoElement.duration * (50 / 100))
-                }
-                // Time to 60% video
-                else if(event.key === '§' || event.key === '6'){
-                    this.videoElement.currentTime = (this.videoElement.duration * (60 / 100))
-                }
-                // Time to 70% video
-                else if(event.key === 'è' || event.key === '7'){
-                    this.videoElement.currentTime = (this.videoElement.duration * (70 / 100))
-                }
-                // Time to 80% video
-                else if(event.key === '!' || event.key === '8'){
-                    this.videoElement.currentTime = (this.videoElement.duration * (80 / 100))
-                }
-                // Time to 90% video
-                else if(event.key === 'ç' || event.key === '9'){
-                    this.videoElement.currentTime = (this.videoElement.duration * (90 / 100))
-                }
-                // Rewind video by 10 sec
-                else if(event.key === 'ArrowLeft'){
-                    this.videoElement.currentTime = this.videoElement.currentTime - 10
-                    this.rewindElement.classList.add('is-active')
-                }
-                // Forward video by 10 sec
-                else if(event.key === 'ArrowRight'){
-                    this.videoElement.currentTime = this.videoElement.currentTime + 10
-                    this.forwardElement.classList.add('is-active')
-                }
-            })
+        document.addEventListener('keydown', (event) =>{
+            // Time to 0% video
+            if(event.key === 'à' || event.key === '0'){
+                this.videoElement.currentTime = (this.videoElement.duration / this.videoElement.currentTime) * 0
+            }
+            // Time to 10% video
+            else if(event.key === '&' || event.key === '1'){
+                this.videoElement.currentTime = (this.videoElement.duration * (10 / 100))
+            }
+            // Time to 20% video
+            else if(event.key === 'é' || event.key === '2'){
+                this.videoElement.currentTime = (this.videoElement.duration * (20 / 100))
+            }
+            // Time to 30% video
+            else if(event.key === '"' || event.key === '3'){
+                this.videoElement.currentTime = (this.videoElement.duration * (30 / 100))
+            }
+            // Time to 40% video
+            else if(event.key === `'` || event.key === '4'){
+                this.videoElement.currentTime = (this.videoElement.duration * (40 / 100))
+            }
+            // Time to 50% video
+            else if(event.key === '(' || event.key === '5'){
+                this.videoElement.currentTime = (this.videoElement.duration * (50 / 100))
+            }
+            // Time to 60% video
+            else if(event.key === '§' || event.key === '6'){
+                this.videoElement.currentTime = (this.videoElement.duration * (60 / 100))
+            }
+            // Time to 70% video
+            else if(event.key === 'è' || event.key === '7'){
+                this.videoElement.currentTime = (this.videoElement.duration * (70 / 100))
+            }
+            // Time to 80% video
+            else if(event.key === '!' || event.key === '8'){
+                this.videoElement.currentTime = (this.videoElement.duration * (80 / 100))
+            }
+            // Time to 90% video
+            else if(event.key === 'ç' || event.key === '9'){
+                this.videoElement.currentTime = (this.videoElement.duration * (90 / 100))
+            }
+            // Rewind video by 10 sec
+            else if(event.key === 'ArrowLeft'){
+                this.videoElement.currentTime = this.videoElement.currentTime - 10
+                this.rewindElement.classList.add('is-active')
+            }
+            // Forward video by 10 sec
+            else if(event.key === 'ArrowRight'){
+                this.videoElement.currentTime = this.videoElement.currentTime + 10
+                this.forwardElement.classList.add('is-active')
+            }
+        })
         // Remove mark rewind / forward
         document.addEventListener('keyup', (event) =>{
             if(event.key === 'ArrowLeft'){
