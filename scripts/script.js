@@ -121,19 +121,16 @@ class Player{
             let currentTimeSeconds = Math.floor(this.videoElement.currentTime % 60)
             let currentTimeMinutes = Math.floor((this.videoElement.currentTime) / 60)
 
-            this.videoCurrentTimeDisplay.innerHTML = `${currentTimeMinutes} : ${currentTimeSeconds}`
+            let durationTimeSeconds = Math.floor((this.videoElement.duration - this.videoElement.currentTime) % 60)
+            let durationTimeMinutes = Math.floor((this.videoElement.duration - this.videoElement.currentTime) / 60)
+
+            this.videoCurrentTimeDisplay.innerHTML = `${currentTimeMinutes} : ${currentTimeSeconds} | ${durationTimeMinutes} : ${durationTimeSeconds}`
 
             if(currentTimeSeconds < 60){
                 currentTimeSeconds = 0
                 currentTimeMinutes++
             }
-
-            let durationTimeSeconds = Math.floor((this.videoElement.duration - this.videoElement.currentTime) % 60)
-            let durationTimeMinutes = Math.floor((this.videoElement.duration - this.videoElement.currentTime) / 60)
-
-            this.videoDurationTimeDisplay.innerHTML = `${durationTimeMinutes} : ${durationTimeSeconds}`
-
-            if(durationTimeSeconds < 60){
+            else if(durationTimeSeconds < 60){
                 durationTimeSeconds = 0
                 durationTimeMinutes++
             }
