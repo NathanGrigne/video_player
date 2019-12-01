@@ -61,12 +61,28 @@ class Player{
         this.setSeekBar()
     }
     setSeekBarVolume(){
+        this.userIsDraggingSeekBarVolume = false
+
+        // Drag and drop
+        this.seekBarVolume.addEventListener('mousedown', (_event) => {
+            this.userIsDraggingSeekBarVolume = true
+            this.dragSeekBarVolume(_event)
+        })
+
+        this.seekBarVolume.addEventListener('mousemove', (_event) => {
+            if(this.userIsDraggingSeekBarVolume){
+                this.dragSeekBarVolume(_event)
+            }
+        })
+
         this.seekBarVolume.addEventListener('click', (_event) =>{
             const bounding = this.seekBarVolume.getBoundingClientRect()
             const ratio = (_event.clientY - bounding.top) / bounding.height
             const volume = ratio
 
             this.seekBarVolumeFill.style.transform = `scaleY(${ratio})`
+
+            this.userIsDraggingSeekBarVolume = false
 
             this.videoElement.volume = volume
 
@@ -86,6 +102,12 @@ class Player{
                 this.volumeElement.classList.remove('volume-full-button')
             }
         })
+    }
+    dragSeekBarVolume(_event){
+        const bounding = this.seekBarVolume.getBoundingClientRect()
+        const ratio = (_event.clientY - bounding.top) / bounding.height
+
+        this.seekBarVolumeFill.style.transform = `scaleY(${ratio})`
     }
     setShare(){
         // Display url of the current page 
@@ -402,6 +424,29 @@ class Player{
             this.fillElement.style.transform = `scaleX(${ratio})`
         })
 
+        this.userIsDraggingSeekBar = false
+         // Drag and drop
+        this.seekBarElement.addEventListener('mousedown', (_event) => {
+            this.userIsDraggingSeekbar = true
+            this.dragSeekBar(_event)
+        })
+
+        this.seekBarElement.addEventListener('mousemove', (_event) => {
+            if(this.userIsDraggingSeekbar){
+                this.dragSeekBar(_event)
+            }
+        })
+
+        this.seekBarElement.addEventListener('click', (_event) => {
+            const bounding = this.seekBarElement.getBoundingClientRect()
+            const ratio = (_event.clientX - bounding.left) / bounding.width
+            const time = ratio * this.videoElement.duration
+
+            this.videoElement.currentTime = time
+
+            // Drag and drop
+            this.userIsDraggingSeekbar = false
+        })
         this.seekBarElement.addEventListener('click', (_event) =>{
             const bounding = this.seekBarElement.getBoundingClientRect()
             const ratio = (_event.clientX - bounding.left) / bounding.width
@@ -409,6 +454,7 @@ class Player{
 
             this.videoElement.currentTime = time
         })
+
         // Press a number between 0 and 9 and go to the percentage of the video
         // Time is forward or rewind by 10s when arrowLeft or arrowRight is press
         document.addEventListener('keydown', (event) =>{
@@ -472,6 +518,12 @@ class Player{
                 this.forwardElement.classList.remove('is-active')
             }
         })
+    }
+    dragSeekBar(_event){
+        const bounding = this.seekBarElement.getBoundingClientRect()
+        const ratio = (_event.clientX - bounding.left) / bounding.width
+
+        this.fillElement.style.transform = `scaleX(${ratio})`
     }
 }
 
