@@ -63,7 +63,7 @@ class Player{
     setSeekBarVolume(){
         this.userIsDraggingSeekBarVolume = false
 
-        // Drag and drop
+        // Drag and drop sekk bar volume
         this.seekBarVolume.addEventListener('mousedown', (_event) => {
             this.userIsDraggingSeekBarVolume = true
             this.dragSeekBarVolume(_event)
@@ -163,8 +163,8 @@ class Player{
         this.descVideoMenu.forEach((_element, _key) =>{
             _element.addEventListener('click', () =>{
                 if(_key === 0){
-                    this.videoElement.removeAttribute('src','video/video2.mp4')
-                    this.videoElement.setAttribute('src','video/video.mp4')
+                    this.videoElement.removeAttribute('src','video/videoChina.mp4')
+                    this.videoElement.setAttribute('src','video/videoBoraBora.mp4')
 
                     this.videoElement.removeAttribute('poster','images/poster2.jpg')
                     this.videoElement.setAttribute('poster','images/poster.jpg')
@@ -179,8 +179,8 @@ class Player{
                     })
                 }
                 else if(_key === 1){
-                    this.videoElement.removeAttribute('src','video/video.mp4')
-                    this.videoElement.setAttribute('src','video/video2.mp4')
+                    this.videoElement.removeAttribute('src','video/videoBoraBora.mp4')
+                    this.videoElement.setAttribute('src','video/videoChina.mp4')
 
                     this.videoElement.removeAttribute('poster','images/poster.jpg')
                     this.videoElement.setAttribute('poster','images/poster2.jpg')
@@ -425,7 +425,7 @@ class Player{
         })
 
         this.userIsDraggingSeekBar = false
-         // Drag and drop
+         // Drag and drop seek bar time
         this.seekBarElement.addEventListener('mousedown', (_event) => {
             this.userIsDraggingSeekbar = true
             this.dragSeekBar(_event)

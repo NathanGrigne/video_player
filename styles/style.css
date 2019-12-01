@@ -1,5 +1,4 @@
 /* COLOR ICO : 0bb90b */
-
 body{
     height: 100vh;
     background: aquamarine ;
@@ -428,7 +427,7 @@ body{
     width: 100%;
     height: 100%;
     background: #0bb90b;
-    transform: scaleY(0.5);
+    transform: scaleY(1);
     transform-origin: 0 0;
     cursor: pointer;
     border-radius: 10px;

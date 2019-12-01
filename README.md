@@ -14,6 +14,7 @@ Sur ce player vous pouvez :
   -Obtenir le lien de partage en cliquant sur le bouton share
   -Ouvrir le menu des vidéos disponibles en cliquant sur le bouton menu
   -Vous pouvez quitter tout ce qui est ouvert à l'aide de la touche "Escape"
+  -Le Drag and Drop est fonctionnel sur le volume et la bar de chargement
   
 This player is created as part of a school project.
 
@@ -29,3 +30,4 @@ On this player you can:
   -Get the sharing link by clicking on the share button
   -Open the menu of available videos by clicking on the menu button
   -You can leave everything that is open by pressing the "Escape" button
+  -Drag and Drop is functional on the volume and loading bar
