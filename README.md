@@ -1,6 +1,6 @@
 # video_audio_player
 
-Ce player est créé dans le cadre d'un projet scolaire.
+## Ce player est créé dans le cadre d'un projet scolaire.
 
 Sur ce player vous pouvez :
   - Play/Pause au click, avec la barre "Espace", click sur le bouton Play/Pause
