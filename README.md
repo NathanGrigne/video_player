@@ -16,7 +16,7 @@ Sur ce player vous pouvez :
   - Vous pouvez quitter tout ce qui est ouvert à l'aide de la touche "Escape"
   - Le Drag and Drop est fonctionnel sur le volume et la bar de chargement
   
-This player is created as part of a school project.
+## This player is created as part of a school project.
 
 On this player you can:
   - Play/Pause on click, with the "Space" bar, click on the Play/Pause button
